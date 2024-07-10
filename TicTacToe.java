@@ -1,51 +1,36 @@
-import java.lang.StringBuilder;
-import java.util.Scanner;
-
 public class TicTacToe {
     // Data Fields
     private static final int SIZE = 3;
-    private char[][] board;
-    private char currentPlayer = 'X';
+    private String[][] board;
+    private String currentPlayer = "X";
     private int moves = 0;
     private boolean gameInProgress;
 
     // Constructor
     public TicTacToe() {
-        board = new char[SIZE][SIZE];
-        for (int i = 0; i < SIZE; i++) {
-            for (int j = 0; j < SIZE; j++) {
-                board[i][j] = ' ';
+        board = new String[SIZE][SIZE];
+        for (int x = 0; x < SIZE; x++) {
+            for (int y = 0; y < SIZE; y++) {
+                board[x][y] = "";
             }
         }
         gameInProgress = true;
-        System.out.println(printBoard());
-        System.out.println("It is " + currentPlayer + "'s turn");
     }
 
     // Methods
-    public void move(int x, int y) {
-        x--;
-        y--;
-        if (x < 0 || x > SIZE - 1 || y < 0 || y > SIZE - 1) {
-            System.out.println("Coordinates out of range, enter a different square.");
-            return;
+    public String move(int x, int y) {
+        String returnVal = "";
+
+        board[x][y] = currentPlayer;
+        moves++;
+        // SIZE * 2 - 1 equals the smallest number of moves needed for a win
+        if (moves >= (SIZE * 2 - 1)) {
+            returnVal = checkWinState();
         }
-        if (board[x][y] == ' ') {
-            board[x][y] = currentPlayer;
-            moves++;
-            System.out.println(printBoard());
-            // SIZE * 2 - 1 equals the smallest number of moves needed for a win
-            if (moves >= (SIZE * 2 - 1)) {
-                System.out.println(checkWinState());
-            }
-            if (gameInProgress) {
-                changePlayer();
-            }
-            return;
+        if (gameInProgress) {
+            changePlayer();
         }
-        else {
-            System.out.println("This square is already taken, enter a different square.");
-        }
+        return returnVal;
     }
 
     private String checkWinState() {
@@ -109,59 +94,29 @@ public class TicTacToe {
     }
 
     private void changePlayer() {
-        if (currentPlayer == 'X') {
-            currentPlayer = 'O';
+        if (currentPlayer == "X") {
+            currentPlayer = "O";
         } else {
-            currentPlayer = 'X';
+            currentPlayer = "X";
         }
-        System.out.println("It is " + currentPlayer + "'s turn");
     }
 
-    private String printBoard() {
-        /* Board should appear as:
-        3| | | |
-        2| | | |
-        1| | | |
-         |1|2|3| */
-        StringBuilder str = new StringBuilder();
-        for (int y = SIZE - 1; y >= 0; y--) {
-            str.append((y + 1) + "|");
-            for (int x = 0; x < SIZE; x++) {
-                str.append(board[x][y] + "|");
+    public void reset() {
+        for (int x = 0; x < SIZE; x++) {
+            for (int y = 0; y < SIZE; y++) {
+                board[x][y] = "";
             }
-            str.append("\n");
         }
-        str.append(" |");
-        for (int x = 1; x <= SIZE; x++) {
-            str.append(x + "|");
-        }
-        return str.toString();
+        moves = 0;
+        currentPlayer = "X";
+        gameInProgress = true;
     }
 
     public boolean getGameInProgress() {
         return gameInProgress;
     }
 
-    public static void main(String[] args) {
-        boolean playAgain = false;
-        Scanner scan = new Scanner(System.in);
-        System.out.println("Welcome to tic-tac-toe!");
-        do {
-            TicTacToe game = new TicTacToe();
-            while (game.getGameInProgress()) {
-                System.out.println("Enter the x and y coordinates of the square you would like to place a marker in.");
-                int x = scan.nextInt();
-                int y = scan.nextInt();
-                game.move(x, y);
-            }
-            System.out.println("Would you like to play again? Enter \"Y\" for yes or \"N\" for no");
-            String input = scan.next();
-            if (input.equalsIgnoreCase("Y")) {
-                playAgain = true;
-            } else if (input.equalsIgnoreCase("N")) {
-                playAgain = false;
-            }
-        } while (playAgain);
-        scan.close();
+    public String getCurrentPlayer() {
+        return currentPlayer;
     }
 }
