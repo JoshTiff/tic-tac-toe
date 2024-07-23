@@ -21,6 +21,8 @@ public class Menu {
     private PropertyChangeSupport support;
 
     private String action;
+    private int difficulty;
+    private char playerSelection;
 
     // Constructor
     public Menu() {
@@ -42,6 +44,7 @@ public class Menu {
         quitButton.setActionCommand("quit");
         panel.add(quitButton);
 
+        // Creates PropertyChangeSupport for GuiController to listen to
         support = new PropertyChangeSupport(this);
         action = "";
     }
@@ -70,6 +73,14 @@ public class Menu {
         return action;
     }
 
+    public int getDifficulty() {
+        return difficulty;
+    }
+
+    public char getPlayerSelection() {
+        return playerSelection;
+    }
+
     private class ButtonAction extends AbstractAction {
         public ButtonAction(String name) {
            super(name);
@@ -82,7 +93,14 @@ public class Menu {
             JButton button = (JButton) e.getSource();
             switch (button.getActionCommand()) {
                 case "onePlayer":
-                    setAction("onePlayerActive");
+                    // Prompts user to select a difficulty and if they want to play as X or O
+                    String[] diffOptions = {"Easy", "Medium", "Hard", "Impossible", "Cancel"};
+                    difficulty = JOptionPane.showOptionDialog(panel, "Select a difficulty:", "Tic-Tac-Toe", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, diffOptions, diffOptions[0]);
+                        if (difficulty != 4) {
+                            String[] playerOptions = {"X", "O"};
+                            playerSelection = playerOptions[JOptionPane.showOptionDialog(panel, "Who would you like to play as?", "Tic-Tac-Toe", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, playerOptions, playerOptions[0])].charAt(0);
+                            setAction("onePlayerActive");
+                        }
                     break;
 
                 case "twoPlayer":
@@ -90,6 +108,7 @@ public class Menu {
                     break;
 
                 case "quit":
+                    // Displays confirmation message to verify user wants to quit
                     int input = JOptionPane.showConfirmDialog(panel, "Are you sure you want to quit?", "Tic-Tac-Toe", JOptionPane.YES_NO_OPTION);
                     if (input == JOptionPane.YES_OPTION) {
                         setAction("quitting");

@@ -31,7 +31,6 @@ public class GuiController implements PropertyChangeListener {
         frame.add(visiblePanel);
         frame.setSize(400, 400);
         frame.setVisible(true);
-        frame.setResizable(false);
 
         openMenu();
     }
@@ -57,7 +56,8 @@ public class GuiController implements PropertyChangeListener {
         if (currentPanel.equals("menu")) {
             switch (menu.getAction()) {
                 case "onePlayerActive":
-                    // TO BE IMPLEMENTED
+                    board.initializeSingleGame(menu.getDifficulty(), menu.getPlayerSelection());
+                    openBoard();
                     break;
                 
                 case "twoPlayerActive":
