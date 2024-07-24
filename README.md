@@ -6,9 +6,13 @@ In this project, the GuiController class instantiates both the Menu and Board GU
 
 ### Features of the project include:
 Minimax algorithm with alpha-beta pruning for fast and effective move calculations: the minimax algorithm allows for the best move to be found from any board. Using alpha beta pruning improves efficiency by not checking a move to completion as soon as it is determined to be worse than an already calculated move. In testing of finding the first move on a 3-by-3 board with the user playing as O, alpha-beta pruning took an average of 14.9 ms vs the original calculation time of 42.2 ms, making it much more efficient.
-<br/>Dynamic board size: By changing the static final variable SIZE in the Game class, the rest of the code is set up to allow for any size of board. Despite optimizations, a board size of 4-5 has some delays in move generation and anything larger takes too long to be playable.
+
+Dynamic board size: By changing the static final variable SIZE in the Game class, the rest of the code is set up to allow for any size of board. Despite optimizations, a board size of 4-5 has some delays in move generation and anything larger takes too long to be playable.
+
 <br/>Intuitive GUI: The GUI is simple and its functions are easy for users to understand.
+
 <br/>Simple navigation between the menu and the game board: After each game, users are able to return to the menu.
+
 <br/>Replayability and ability to change game modes: The program is set up to be played as many times as a user wants. After a game is finished, they can either play again or return to the menu, where they are able to switch between singleplayer and multiplayer or to switch difficulties.
 
 ### How to install and run the project:
