@@ -9,11 +9,11 @@ Minimax algorithm with alpha-beta pruning for fast and effective move calculatio
 
 Dynamic board size: By changing the static final variable SIZE in the Game class, the rest of the code is set up to allow for any size of board. Despite optimizations, a board size of 4-5 has some delays in move generation and anything larger takes too long to be playable.
 
-<br/>Intuitive GUI: The GUI is simple and its functions are easy for users to understand.
+Intuitive GUI: The GUI is simple and its functions are easy for users to understand.
 
-<br/>Simple navigation between the menu and the game board: After each game, users are able to return to the menu.
+Simple navigation between the menu and the game board: After each game, users are able to return to the menu.
 
-<br/>Replayability and ability to change game modes: The program is set up to be played as many times as a user wants. After a game is finished, they can either play again or return to the menu, where they are able to switch between singleplayer and multiplayer or to switch difficulties.
+Replayability and ability to change game modes: The program is set up to be played as many times as a user wants. After a game is finished, they can either play again or return to the menu, where they are able to switch between singleplayer and multiplayer or to switch difficulties.
 
 ### How to install and run the project:
 This project can be run by downloading all of the Java files (Board, Game, GuiController, Main, Menu, and SingleGame) and running the main function in Main.java. This function creates a GuiController object and the rest is handled by the other classes.
