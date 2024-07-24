@@ -1,6 +1,6 @@
 public class Game {
     // Data Fields
-    private static final int SIZE = 4;
+    private static final int SIZE = 3;
     private char[][] board;
     private char currentPlayer;
     private int moves;
